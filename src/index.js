@@ -1,15 +1,20 @@
 import React from 'react';
 import { useState } from 'react';
+import { useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './App.css';
 
 
 function TrackButton(){
-  const [count, setCount] = useState(0);
-  
+  const [count, setCount] = useState(JSON.parse(localStorage.getItem('count')) || 0);
+
   function handleClick(){
     setCount(count + 1);
   }
+
+  useEffect(() =>{
+    localStorage.setItem('count', JSON.stringify(count));
+  }, [count]);
   
   return(
     <button onClick={handleClick}>
